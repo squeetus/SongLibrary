@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-
+// Create a MySQL connection with hard-coded credentials for local testing
 const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'songlibrarytest',
@@ -8,8 +8,13 @@ const connection = mysql.createConnection({
   multipleStatements: true
 });
 
-
+/*
+  Connect to the database described in the connection variable
+  Run commands to drop/create the database and song table and seed song data
+*/
 exports.connect = () => {
+
+  // command to create the song database and song table schema once
   let createCommand = `
     CREATE DATABASE IF NOT EXISTS burlinson_song_library;
     use burlinson_song_library;
@@ -23,7 +28,7 @@ exports.connect = () => {
       price float NOT NULL
     );
     `
-
+  // command to insert multiple songs at once
   let seedCommand = `
     INSERT INTO song (title, artist, release_date, price)
     VALUES
@@ -35,9 +40,8 @@ exports.connect = () => {
     ;
     `
 
-  /*
-
-  */
+  // connect to the database and run the create and seed commands
+  // throw an error and print the stack trace if the queries fail
   connection.connect((err) => {
       if(err) throw('unable to establish database connection: ' + err.stack);
       console.log('connected to database');
@@ -54,6 +58,22 @@ exports.connect = () => {
   });
 }
 
+/*
+  Get all the songs from the database
+  pass the resultant array and any errors to the callback function
+*/
 exports.getAllSongs = (cb) => {
   connection.query("SELECT * FROM song", (err, result) => cb(err, result));
+}
+
+/*
+  Add a new song to the database using a prepared statement
+  pass the result and any errors to the callback function
+*/
+exports.addSong = (song, cb) => {
+  connection.execute(
+    "INSERT INTO song (title, artist, release_date, price) VALUES (?, ?, ?, ?)",
+    [song.title, song.artist, new Date(song.release_date), song.price],
+    (err, result) => cb(err, result)
+  );
 }
