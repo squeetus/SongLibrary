@@ -24,9 +24,23 @@ app.get('/getAllSongs', (req, res) => {
     if(err) {
       console.log(err);
       res.status(500).send(err);
+    } else {
+      res.json(songs);
     }
-    res.json(songs);
   });
+});
+
+/*
+  API Endpoint /saveList
+  method: POST
+  returns OK 4/5 attempts, and 500 1/5 attempts
+*/
+app.post('/saveList', (req, res) => {
+  if(Math.random() < 0.2) {
+    res.status(500).send({"error":"Unable to save the song list, please try again shortly."})
+  } else {
+    res.sendStatus(200);
+  }
 });
 
 
@@ -40,8 +54,9 @@ app.post('/song', (req, res) => {
     if(err) {
       console.log(err);
       res.status(500).send(err);
+    } else {
+      res.sendStatus(200);
     }
-    res.sendStatus(200);
   });
 });
 
@@ -56,8 +71,9 @@ app.put('/song', (req, res) => {
     if(err) {
       console.log(err);
       res.status(500).send(err);
+    } else {
+      res.sendStatus(200);
     }
-    res.sendStatus(200);
   });
 });
 
@@ -72,8 +88,9 @@ app.delete('/song', (req, res) => {
     if(err) {
       console.log(err);
       res.status(500).send(err);
+    } else {
+      res.sendStatus(200);
     }
-    res.sendStatus(200);
   });
 });
 

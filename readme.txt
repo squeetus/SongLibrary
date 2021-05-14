@@ -42,5 +42,6 @@ Endpoints:
 	POST	/song 	expects a JSON object with song attributes
 	PUT 	/song	expects a JSON object with song attributes; updates based on id (pk)
 	DELETE /song	expects a JSON object with an id of the song to delete
+	POST	/saveList expects a JSON object of song attributes, returns an error roughly 1 in 5 attempts
 
 Front end single page app implemented in Angular
