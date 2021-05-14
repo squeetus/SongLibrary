@@ -39,6 +39,8 @@ Steps:
 
 Endpoints:
 	GET 	/getAllSongs	returns a JSON object containing an array of songs from the database
-	POST	/addSong 	expects a JSON object with song attributes
+	POST	/song 	expects a JSON object with song attributes
+	PUT 	/song	expects a JSON object with song attributes; updates based on id (pk)
+	DELETE /song	expects a JSON object with an id of the song to delete
 
 Front end single page app implemented in Angular
