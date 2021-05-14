@@ -1,14 +1,16 @@
 const mysql = require('mysql2');
 
-exports.connect = () => {
-  const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'songlibrarytest',
-    password : 'test',
-    multipleStatements: true
-  });
 
-  var createCommand = `
+const connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'songlibrarytest',
+  password : 'test',
+  multipleStatements: true
+});
+
+
+exports.connect = () => {
+  let createCommand = `
     CREATE DATABASE IF NOT EXISTS burlinson_song_library;
     use burlinson_song_library;
 
@@ -22,7 +24,7 @@ exports.connect = () => {
     );
     `
 
-  var seedCommand = `
+  let seedCommand = `
     INSERT INTO song (title, artist, release_date, price)
     VALUES
       ('Song1', 'Artist1', Date("2021-05-04"), 12.99),
@@ -50,6 +52,8 @@ exports.connect = () => {
         console.log('songs seeded');
       });
   });
+}
 
-  return connection;
+exports.getAllSongs = (cb) => {
+  connection.query("SELECT * FROM song", (err, result) => cb(err, result));
 }
