@@ -1,7 +1,7 @@
 Song Library Project Overview:
 
 MySQL relational database will store the song data
-	- create a new user and grant privileges 
+	- create a new user and grant privileges
 
 Steps:
 	Run MySQL Command Line Client
@@ -24,10 +24,10 @@ Steps:
 	> node -v
 	> v14.16.1
 
-	> npm -v 
+	> npm -v
 	> 6.14.12
 
-	install the node dependencies and run the server	
+	install the node dependencies and run the server
 	> npm install
 	> node server.js
 
@@ -38,7 +38,7 @@ Steps:
 	>songs seeded
 
 Endpoints:
-	/getAllSongs	returns a JSON object containing an array of songs from the database
-
+	GET 	/getAllSongs	returns a JSON object containing an array of songs from the database
+	POST	/addSong 	expects a JSON object with song attributes
 
 Front end single page app implemented in Angular
