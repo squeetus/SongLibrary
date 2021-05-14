@@ -31,12 +31,44 @@ app.get('/getAllSongs', (req, res) => {
 
 
 /*
-  API Endpoint /addSong
+  API Endpoint /song
   method: POST
   returns 200 OK if completed, 500 if errors occur
 */
-app.post('/addSong', (req, res) => {
+app.post('/song', (req, res) => {
   songs = db.addSong(req.body, (err, result, song) => {
+    if(err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    res.sendStatus(200);
+  });
+});
+
+
+/*
+  API Endpoint /song
+  method: PUT
+  returns 200 OK if completed, 500 if errors occur
+*/
+app.put('/song', (req, res) => {
+  songs = db.updateSong(req.body, (err, result, song) => {
+    if(err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    res.sendStatus(200);
+  });
+});
+
+
+/*
+  API Endpoint /song
+  method: DELETE
+  returns 200 OK if completed, 500 if errors occur
+*/
+app.delete('/song', (req, res) => {
+  songs = db.deleteSong(req.body.id, (err, result, song) => {
     if(err) {
       console.log(err);
       res.status(500).send(err);

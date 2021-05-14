@@ -5,7 +5,8 @@ const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'songlibrarytest',
   password : 'test',
-  multipleStatements: true
+  multipleStatements: true,
+  dateStrings: true
 });
 
 /*
@@ -74,6 +75,30 @@ exports.addSong = (song, cb) => {
   connection.execute(
     "INSERT INTO song (title, artist, release_date, price) VALUES (?, ?, ?, ?)",
     [song.title, song.artist, new Date(song.release_date), song.price],
+    (err, result) => cb(err, result)
+  );
+}
+
+/*
+  Update song in the database using a prepared statement
+  pass the result and any errors to the callback function
+*/
+exports.updateSong = (song, cb) => {
+  connection.execute(
+    "UPDATE song SET title=?, artist=?, release_date=?, price=? WHERE id=?",
+    [song.title, song.artist, new Date(song.release_date), song.price, song.id],
+    (err, result) => cb(err, result)
+  );
+}
+
+/*
+  Delete a song in the database using a prepared statement
+  pass the result and any errors to the callback function
+*/
+exports.deleteSong = (id, cb) => {
+  connection.execute(
+    "DELETE from song WHERE id=?",
+    [id],
     (err, result) => cb(err, result)
   );
 }
