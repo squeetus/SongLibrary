@@ -17,6 +17,8 @@ export class AppComponent {
   // filteredSongs will always be a subset of allSongs
   public filteredSongs: Song[] = [];
 
+  public songAttributes: string[] = ['title', 'artist', 'release_date', 'price'];
+
   // inject a song service into the module
   constructor(private songService: SongService) {}
 

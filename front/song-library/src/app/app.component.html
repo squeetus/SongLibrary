@@ -1,1 +1,26 @@
-{{title}}
+<h1> {{title}} </h1>
+
+<table mat-table [dataSource]="allSongs" class="mat-elevation-z8">
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let song"> {{song.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="artist">
+    <th mat-header-cell *matHeaderCellDef>Artist</th>
+    <td mat-cell *matCellDef="let song"> {{song.artist}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="release_date">
+    <th mat-header-cell *matHeaderCellDef>Release Date</th>
+    <td mat-cell *matCellDef="let song"> {{song.release_date | date: 'dd/MM/yyyy'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef>Price</th>
+    <td mat-cell *matCellDef="let song"> ${{song.price | number : '1.2-2'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="songAttributes"></tr>
+  <tr mat-row *matRowDef="let row; columns: songAttributes;"></tr>
+</table>

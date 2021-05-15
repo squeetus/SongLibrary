@@ -19,3 +19,6 @@ light grey      #adadad
 
 font-family "museo-sans", Sans-Serif
 */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "museo-sans", sans-serif; }
