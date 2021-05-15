@@ -20,7 +20,7 @@ export class AppComponent {
   public filteredSongs: Song[] = [];
 
   // configure mat-table column bindings
-  public songAttributes: string[] = ['title', 'artist', 'release_date', 'price'];
+  public songAttributes: string[] = ['title', 'artist', 'release_date', 'price', 'actions'];
 
   // prepare the data source for mat-table
   public dataSource =  new MatTableDataSource<Song>()
@@ -76,7 +76,10 @@ export class AppComponent {
   // pass an id of a song for the song service to delete
   public deleteSong(id: number): void {
     this.songService.deleteSong(id).subscribe(
-      res => console.log(res),
+      res => {
+        console.log(res);
+        this.getSongs();
+      },
       (err: HttpErrorResponse) => {
         console.warn(err.message);
       }
@@ -91,5 +94,13 @@ export class AppComponent {
         console.warn(err.message);
       }
     );
+  }
+
+  // placedholders for filtering the song list
+  public filter(): void {
+    this.dataSource.data = this.filteredSongs.slice(0,1);
+  }
+  public unfilter(): void {
+    this.dataSource.data = this.allSongs;
   }
 }

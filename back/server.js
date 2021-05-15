@@ -81,7 +81,7 @@ app.put('/song', (req, res) => {
 /*
   API Endpoint /song
   method: DELETE
-  returns 200 OK if completed, 500 if errors occur
+  returns a json object with a success message if completed, 500 if errors occur
 */
 app.delete('/song/:id', (req, res) => {
   songs = db.deleteSong(req.params.id, (err, result) => {
@@ -89,7 +89,7 @@ app.delete('/song/:id', (req, res) => {
       console.log(err);
       res.status(500).send(err);
     } else {
-      res.sendStatus(200);
+      res.status(200).json({'message': `successfully deleted ${result.affectedRows} song with id ${req.params.id}`});
     }
   });
 });
