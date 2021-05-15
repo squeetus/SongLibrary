@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Song } from './song';
 import { SongService } from './song.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm }   from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,14 @@ export class AppComponent {
   // filteredSongs will always be a subset of allSongs
   public filteredSongs: Song[] = [];
 
+  // configure mat-table column bindings
   public songAttributes: string[] = ['title', 'artist', 'release_date', 'price'];
+
+  // prepare the data source for mat-table
+  public dataSource =  new MatTableDataSource<Song>()
+
+  // declare sorting functionality for the table rows
+  @ViewChild(MatSort) sort: any;
 
   // inject a song service into the module
   constructor(private songService: SongService) {}
@@ -33,7 +42,10 @@ export class AppComponent {
         (res: Song[]) => {
           this.allSongs = res;
           this.filteredSongs = this.allSongs;
-          console.log(this.allSongs);
+
+          // bind song data and sorting to the mat-table dataSource
+          this.dataSource.data = this.filteredSongs;
+          this.dataSource.sort = this.sort;
         },
         (err: HttpErrorResponse) => {
           console.warn(err.message);

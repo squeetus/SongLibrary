@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table'
+import { MatSortModule } from '@angular/material/sort';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     NoopAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
