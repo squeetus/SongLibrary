@@ -50,7 +50,7 @@ app.post('/saveList', (req, res) => {
   returns 200 OK if completed, 500 if errors occur
 */
 app.post('/song', (req, res) => {
-  songs = db.addSong(req.body, (err, result, song) => {
+  songs = db.addSong(req.body, (err, result) => {
     if(err) {
       console.log(err);
       res.status(500).send(err);
@@ -67,7 +67,7 @@ app.post('/song', (req, res) => {
   returns 200 OK if completed, 500 if errors occur
 */
 app.put('/song', (req, res) => {
-  songs = db.updateSong(req.body, (err, result, song) => {
+  songs = db.updateSong(req.body, (err, result) => {
     if(err) {
       console.log(err);
       res.status(500).send(err);
@@ -83,8 +83,8 @@ app.put('/song', (req, res) => {
   method: DELETE
   returns 200 OK if completed, 500 if errors occur
 */
-app.delete('/song', (req, res) => {
-  songs = db.deleteSong(req.body.id, (err, result, song) => {
+app.delete('/song/:id', (req, res) => {
+  songs = db.deleteSong(req.params.id, (err, result) => {
     if(err) {
       console.log(err);
       res.status(500).send(err);

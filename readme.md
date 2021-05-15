@@ -51,7 +51,7 @@ Data: Song objects with id, title, artist, release date, and price
 	- GET 		/getAllSongs	returns a JSON object containing an array of songs from the database
 	- POST		/song 	expects a JSON object with song attributes
 	- PUT 		/song	expects a JSON object with song attributes; updates based on id (pk)
-	- DELETE	/song	expects a JSON object with an id of the song to delete
+	- DELETE	/song/:id	expects a JSON object with an id of the song to delete
 	- POST		/saveList expects a JSON object of song attributes, returns an error roughly 1 in 5 attempts
 
 ### Front end setup
