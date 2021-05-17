@@ -72,7 +72,7 @@ app.put('/song', (req, res) => {
       console.log(err);
       res.status(500).send(err);
     } else {
-      res.sendStatus(200);
+      res.status(200).json({'message': `successfully updated ${result.affectedRows} song with id ${req.body.id}`});
     }
   });
 });
