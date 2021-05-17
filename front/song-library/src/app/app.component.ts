@@ -65,8 +65,12 @@ export class AppComponent {
 
   // pass a song for the song service to update
   public updateSong(song: Song): void {
+    console.log(song);
     this.songService.updateSong(song).subscribe(
-      res => console.log(res),
+      res => {
+        console.log(res);
+        this.getSongs();
+      },
       (err: HttpErrorResponse) => {
         console.warn(err.message);
       }
