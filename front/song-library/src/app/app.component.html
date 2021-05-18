@@ -2,10 +2,12 @@
 
 <button type="button" (click)="filter()">Filter</button><button type="button" (click)="unfilter()">Unfilter</button>
 
+<h4> Song Library Controls </h4> <add-modal (addSong)="addSong($event)"></add-modal>
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions <add-modal (addSong)="addSong($event)"></add-modal></th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
     <td mat-cell *matCellDef="let song">
       <update-modal [song]="song" (updateSong)="updateSong($event)"></update-modal>
       <delete-modal [song]="song" (deleteSong)="deleteSong($event)"></delete-modal>
