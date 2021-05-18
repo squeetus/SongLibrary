@@ -37,9 +37,9 @@ app.get('/getAllSongs', (req, res) => {
 */
 app.post('/saveList', (req, res) => {
   if(Math.random() < 0.2) {
-    res.status(500).send({"error":"Unable to save the song list, please try again shortly."})
+    res.status(500).json({"error":"Unable to save the song list, please try again shortly."})
   } else {
-    res.sendStatus(200);
+    res.status(200).json({'message': `successfully saved your song list with ${req.body.length} songs.`});
   }
 });
 
@@ -55,7 +55,7 @@ app.post('/song', (req, res) => {
       console.log(err);
       res.status(500).send(err);
     } else {
-      res.sendStatus(200);
+      res.status(200).json({'message': `successfully added ${result.affectedRows} song with id ${result.insertId}.`});
     }
   });
 });
@@ -72,7 +72,7 @@ app.put('/song', (req, res) => {
       console.log(err);
       res.status(500).send(err);
     } else {
-      res.status(200).json({'message': `successfully updated ${result.affectedRows} song with id ${req.body.id}`});
+      res.status(200).json({'message': `successfully updated ${result.affectedRows} song with id ${req.body.id}.`});
     }
   });
 });
@@ -89,7 +89,7 @@ app.delete('/song/:id', (req, res) => {
       console.log(err);
       res.status(500).send(err);
     } else {
-      res.status(200).json({'message': `successfully deleted ${result.affectedRows} song with id ${req.params.id}`});
+      res.status(200).json({'message': `successfully deleted ${result.affectedRows} song with id ${req.params.id}.`});
     }
   });
 });
