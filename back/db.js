@@ -26,7 +26,7 @@ exports.connect = () => {
       title varchar(100) NOT NULL,
       artist varchar(100) NOT NULL,
       release_date DATE NOT NULL,
-      price float NOT NULL
+      price decimal(9,2) NOT NULL
     );
     `
   // command to insert multiple songs at once
