@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm }   from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,14 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AppComponent {
   title = 'song-library';
+
+  // ngx-slider options
+  public minVal: number = 1900;
+  public maxVal: number = 2100;
+  sliderOptions: Options = {
+    floor: this.minVal,
+    ceil: this.maxVal
+  };
 
   // allSongs will keep track of the master list
   public allSongs: Song[] = [];
@@ -46,6 +55,14 @@ export class AppComponent {
           // bind song data and sorting to the mat-table dataSource
           this.dataSource.data = this.filteredSongs;
           this.dataSource.sort = this.sort;
+
+          // bind song date range to the slider and reset filter
+          const newOptions: Options = Object.assign({}, this.sliderOptions);
+          newOptions.floor = Math.min(...this.filteredSongs.map(song => +song.release_date.slice(0,4)));
+          newOptions.ceil = Math.max(...this.filteredSongs.map(song => +song.release_date.slice(0,4)));
+          this.sliderOptions = newOptions;
+          this.minVal = newOptions.floor;
+          this.maxVal = newOptions.ceil;
         },
         (err: HttpErrorResponse) => {
           console.warn(err.message);
@@ -103,11 +120,26 @@ export class AppComponent {
     );
   }
 
-  // placedholders for filtering the song list
+  // limit the rate of fire for filter updates
+  public doFilter = this.throttle(() => this.filter());
+
+  // filter the song table based on the release year
   public filter(): void {
-    this.dataSource.data = this.filteredSongs.slice(0,1);
+    this.dataSource.data = this.filteredSongs.filter((song) => {
+      let year = +song.release_date.slice(0,4);
+      return (year >= this.minVal && year <= this.maxVal) ? true : false;
+    });
   }
-  public unfilter(): void {
-    this.dataSource.data = this.allSongs;
+
+  // throttle a function so it fires at most 5 times a second
+  private throttle(func: any) {
+    var lastTime = 0;
+    return function () {
+        var now = new Date().getTime();
+        if (now - lastTime >= 200) {
+            func();
+            lastTime = now;
+        }
+    };
   }
 }

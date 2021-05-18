@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteModalComponent } from './song-modal/delete-modal.component';
 import { UpdateModalComponent } from './song-modal/update-modal.component';
 import { AddModalComponent } from './song-modal/add-modal.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AddModalComponent } from './song-modal/add-modal.component';
     NoopAnimationsModule,
     MatTableModule,
     MatSortModule,
-    NgbModule
+    NgbModule,
+    NgxSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
