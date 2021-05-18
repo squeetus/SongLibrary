@@ -1,7 +1,8 @@
 import { Input, Output, EventEmitter, Component } from '@angular/core';
 import { Song } from '../song';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { CustomValidators } from './custom-validators';
 
 @Component({
   selector: 'update-modal',
@@ -12,23 +13,37 @@ export class UpdateModalComponent {
   @Input() song!: Song;
   @Output() updateSong = new EventEmitter<Song>();
 
+  // set the structure and validators for the song form
   constructor(private modalService: NgbModal, public fb: FormBuilder) {
     this.songForm = this.fb.group({
-      title: '',
       id: '',
-      artist: '',
-      release_date: '',
-      price: ''
+      title: ['', Validators.required],
+      artist: ['', Validators.required],
+      release_date: ['', [Validators.required, CustomValidators.songDate]],
+      price: ['', [Validators.required, Validators.min(0), Validators.max(1000000)]]
     });
   }
 
+  // expose controls for reactive validation
+  get songFormControl() {
+    return this.songForm.controls;
+  }
+
+  // handle the update modal
   public open(editModal: any) {
 
+    // bind the current song to the form
     this.songForm.patchValue(this.song);
 
+    // open the modal and handle the result
     this.modalService.open(editModal).result.then((result) => {
-      // on confirmation, pass the song id to update
-      this.updateSong.emit(this.songForm.value);
+      console.log(this.songForm);
+
+      // make sure the Song form is valid
+      if(this.songForm.valid) {
+        // pass the song values to the parent module to update
+        this.updateSong.emit(this.songForm.value);
+      }
     }, (reason) => {
       // edit modal dismissed
     });
