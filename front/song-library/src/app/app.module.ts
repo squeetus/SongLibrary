@@ -10,12 +10,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteModalComponent } from './song-modal/delete-modal.component';
 import { UpdateModalComponent } from './song-modal/update-modal.component';
+import { AddModalComponent } from './song-modal/add-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeleteModalComponent,
-    UpdateModalComponent
+    UpdateModalComponent,
+    AddModalComponent
   ],
   imports: [
     BrowserModule,

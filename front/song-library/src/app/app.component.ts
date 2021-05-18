@@ -56,7 +56,10 @@ export class AppComponent {
   // pass a new song for the song service to add
   public addSong(song: Song): void {
     this.songService.addSong(song).subscribe(
-      res => console.log(res),
+      res => {
+        console.log(res);
+        this.getSongs();
+      },
       (err: HttpErrorResponse) => {
         console.warn(err.message);
       }
