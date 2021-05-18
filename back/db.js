@@ -6,7 +6,8 @@ const connection = mysql.createConnection({
   user     : 'songlibrarytest',
   password : 'test',
   multipleStatements: true,
-  dateStrings: true
+  dateStrings: true,
+  timezone: 'utc'
 });
 
 /*
