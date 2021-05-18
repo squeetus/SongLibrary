@@ -110,12 +110,13 @@ export class AppComponent {
     );
   }
 
-  // pass a stringified song list to save
-  public saveList(songs: Song[]): void {
-    this.songService.saveList(JSON.stringify(songs)).subscribe(
+  // save a list of all the songs
+  public saveList(): void {
+    console.log(JSON.stringify(this.filteredSongs));
+    this.songService.saveList(JSON.stringify(this.filteredSongs)).subscribe(
       res => console.log(res),
       (err: HttpErrorResponse) => {
-        console.warn(err.message);
+        console.warn(err.error);
       }
     );
   }
@@ -125,10 +126,11 @@ export class AppComponent {
 
   // filter the song table based on the release year
   public filter(): void {
-    this.dataSource.data = this.filteredSongs.filter((song) => {
+    this.filteredSongs = this.allSongs.filter((song) => {
       let year = +song.release_date.slice(0,4);
       return (year >= this.minVal && year <= this.maxVal) ? true : false;
     });
+    this.dataSource.data = this.filteredSongs;
   }
 
   // throttle a function so it fires at most 5 times a second
