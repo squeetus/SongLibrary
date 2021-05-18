@@ -37,7 +37,7 @@ app.get('/getAllSongs', (req, res) => {
 */
 app.post('/saveList', (req, res) => {
   if(Math.random() < 0.2) {
-    res.status(500).json({"error":"Unable to save the song list, please try again shortly."})
+    res.status(500).end("Unable to save the song list, please try again shortly.")
   } else {
     res.status(200).json({'message': `successfully saved your song list with ${req.body.length} songs.`});
   }
