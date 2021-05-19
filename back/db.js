@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
   password : 'test',
   multipleStatements: true,
   dateStrings: true,
-  timezone: 'utc'
+  timezone: '+00:00'
 });
 
 /*
