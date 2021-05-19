@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs';
 import { Song } from './song';
+import { Response } from './response';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,22 +23,22 @@ export class SongService {
   }
 
   // post a new song to the back end
-  public addSong(song: Song): Observable<void> {
-    return this.http.post<void>(`${this.apiServerUrl}/song`, song);
+  public addSong(song: Song): Observable<Response> {
+    return this.http.post<Response>(`${this.apiServerUrl}/song`, song);
   }
 
   // put updates for a song to the back end
-  public updateSong(song: Song): Observable<void> {
-    return this.http.put<void>(`${this.apiServerUrl}/song`, song);
+  public updateSong(song: Song): Observable<Response> {
+    return this.http.put<Response>(`${this.apiServerUrl}/song`, song);
   }
 
   // delete a song based on its id
-  public deleteSong(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/song/${id}`);
+  public deleteSong(id: number): Observable<Response> {
+    return this.http.delete<Response>(`${this.apiServerUrl}/song/${id}`);
   }
 
   // save a list of songs
-  public saveList(songs: string): Observable<void> {
-    return this.http.post<void>(`${this.apiServerUrl}/saveList`, songs);
+  public saveList(songs: string): Observable<Response> {
+    return this.http.post<Response>(`${this.apiServerUrl}/saveList`, {"songs": songs});
   }
 }

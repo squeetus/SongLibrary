@@ -6,6 +6,7 @@ import { NgForm }   from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Options } from '@angular-slider/ngx-slider';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import { Options } from '@angular-slider/ngx-slider';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'song-library';
+  title = 'Burlinson Song Library';
 
   // ngx-slider options
   public minVal: number = 1900;
@@ -22,6 +23,13 @@ export class AppComponent {
     floor: this.minVal,
     ceil: this.maxVal
   };
+
+  successMessage = '';
+  successTimeout: any = null;
+  dangerMessage = '';
+  dangerTimeout: any = null;
+  @ViewChild('successAlert', {static: false}) successAlert!: NgbAlert;
+  @ViewChild('dangerAlert', {static: false}) dangerAlert!: NgbAlert;
 
   // allSongs will keep track of the master list
   public allSongs: Song[] = [];
@@ -66,6 +74,9 @@ export class AppComponent {
         },
         (err: HttpErrorResponse) => {
           console.warn(err.message);
+          this.dangerMessage = err.message;
+          clearTimeout(this.dangerTimeout);
+          this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
         }
       );
   }
@@ -75,10 +86,16 @@ export class AppComponent {
     this.songService.addSong(song).subscribe(
       res => {
         console.log(res);
+        this.successMessage = res.message;
+        clearTimeout(this.successTimeout);
+        this.successTimeout = setTimeout(() => this.successAlert.close(), 5000);
         this.getSongs();
       },
       (err: HttpErrorResponse) => {
         console.warn(err.message);
+        this.dangerMessage = err.message;
+        clearTimeout(this.dangerTimeout);
+        this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
       }
     );
   }
@@ -89,10 +106,16 @@ export class AppComponent {
     this.songService.updateSong(song).subscribe(
       res => {
         console.log(res);
+        this.successMessage = res.message;
+        clearTimeout(this.successTimeout);
+        this.successTimeout = setTimeout(() => this.successAlert.close(), 5000);
         this.getSongs();
       },
       (err: HttpErrorResponse) => {
         console.warn(err.message);
+        this.dangerMessage = err.message;
+        clearTimeout(this.dangerTimeout);
+        this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
       }
     );
   }
@@ -102,21 +125,34 @@ export class AppComponent {
     this.songService.deleteSong(id).subscribe(
       res => {
         console.log(res);
+        this.successMessage = res.message;
+        clearTimeout(this.successTimeout);
+        this.successTimeout = setTimeout(() => this.successAlert.close(), 5000);
         this.getSongs();
       },
       (err: HttpErrorResponse) => {
         console.warn(err.message);
+        this.dangerMessage = err.message;
+        clearTimeout(this.dangerTimeout);
+        this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
       }
     );
   }
 
   // save a list of all the songs
   public saveList(): void {
-    console.log(JSON.stringify(this.filteredSongs));
     this.songService.saveList(JSON.stringify(this.filteredSongs)).subscribe(
-      res => console.log(res),
+      (res) => {
+        console.log(res)
+        this.successMessage = res.message;
+        clearTimeout(this.successTimeout);
+        this.successTimeout = setTimeout(() => this.successAlert.close(), 5000);
+      },
       (err: HttpErrorResponse) => {
         console.warn(err.error);
+        this.dangerMessage = err.error;
+        clearTimeout(this.dangerTimeout);
+        this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
       }
     );
   }

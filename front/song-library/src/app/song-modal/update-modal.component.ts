@@ -3,6 +3,7 @@ import { Song } from '../song';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from './custom-validators';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'update-modal',
@@ -12,6 +13,8 @@ export class UpdateModalComponent {
   public songForm: FormGroup;
   @Input() song!: Song;
   @Output() updateSong = new EventEmitter<Song>();
+
+  faEdit = faEdit;
 
   // set the structure and validators for the song form
   constructor(private modalService: NgbModal, public fb: FormBuilder) {

@@ -12,6 +12,7 @@ import { DeleteModalComponent } from './song-modal/delete-modal.component';
 import { UpdateModalComponent } from './song-modal/update-modal.component';
 import { AddModalComponent } from './song-modal/add-modal.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     MatTableModule,
     MatSortModule,
     NgbModule,
-    NgxSliderModule
+    NgxSliderModule,
+    FontAwesomeModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

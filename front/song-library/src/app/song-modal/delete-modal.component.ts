@@ -1,12 +1,15 @@
 import { Input, Output, EventEmitter, Component } from '@angular/core';
 import { Song } from '../song';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'delete-modal',
   templateUrl: './delete-modal.component.html'
 })
 export class DeleteModalComponent {
+
+  faTimes = faTimes;
 
   constructor(private modalService: NgbModal) { }
 
