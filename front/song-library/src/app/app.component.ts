@@ -19,30 +19,36 @@ import { Subject } from 'rxjs/Subject';
 export class AppComponent {
   title = 'Burlinson Song Library';
 
-  // ngx-slider options
-  public minVal: number = 1900;
-  public maxVal: number = 2100;
-  sliderOptions: Options = {
-    floor: this.minVal,
-    ceil: this.maxVal
-  };
-
-  //
-  addAlert: Subject<Alert> = new Subject();
-
   // allSongs will keep track of the master list
   public allSongs: Song[] = [];
   // filteredSongs will always be a subset of allSongs
   public filteredSongs: Song[] = [];
 
+  // bind an observable for use with the alert component
+  addAlert: Subject<Alert> = new Subject();
+
+  /*
+    ngx-slider options
+  */
+  public minVal: number = 1900;
+  public maxVal: number = 2100;
+  sliderOptions: Options = {
+    floor: this.minVal,
+    ceil: this.maxVal,
+    showTicks: true
+  };
+
+  /*
+    mat-table options
+  */
   // configure mat-table column bindings
   public songAttributes: string[] = ['title', 'artist', 'release_date', 'price', 'actions'];
-
   // prepare the data source for mat-table
-  public dataSource =  new MatTableDataSource<Song>()
-
+  public dataSource =  new MatTableDataSource<Song>();
   // declare sorting functionality for the table rows
   @ViewChild(MatSort) sort: any;
+
+
 
   // inject a song service into the module
   constructor(private songService: SongService) {}
@@ -51,6 +57,7 @@ export class AppComponent {
   ngOnInit() {
     this.getSongs();
   }
+
 
   // load all songs from the song service
   public getSongs(): void {
@@ -67,9 +74,22 @@ export class AppComponent {
           const newOptions: Options = Object.assign({}, this.sliderOptions);
           newOptions.floor = Math.min(...this.filteredSongs.map(song => +song.release_date.slice(0,4)));
           newOptions.ceil = Math.max(...this.filteredSongs.map(song => +song.release_date.slice(0,4)));
+
+          if(this.filteredSongs.length <= 2) {
+            newOptions.disabled = true;
+            newOptions.hideLimitLabels = true;
+            newOptions.hidePointerLabels = true;
+          } else {
+            newOptions.disabled = false;
+            newOptions.hideLimitLabels = false;
+            newOptions.hidePointerLabels = false;
+          }
+
           this.sliderOptions = newOptions;
           this.minVal = newOptions.floor;
           this.maxVal = newOptions.ceil;
+
+
         },
         (err: HttpErrorResponse) => {
           console.warn(err.message);
@@ -147,6 +167,16 @@ export class AppComponent {
 
   // save a list of all the songs
   public saveList(): void {
+
+    // show a warning if there are no songs filtered
+    if(this.filteredSongs.length === 0) {
+      this.addAlert.next({
+        type: 'warning',
+        message: 'You do not have any songs to save!',
+      });
+      return;
+    }
+
     this.songService.saveList(JSON.stringify(this.filteredSongs)).subscribe(
       (res) => {
         this.addAlert.next({
