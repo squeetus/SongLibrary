@@ -33,21 +33,34 @@ body {
 
 .btn {
   margin: 2px;
+  font-family: "open-sans-condensed",sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 0px;
 }
 .btn-primary,
  .btn-primary:active,.btn-primary.active,
  .btn-primary:focus,.btn-primary.focus,
  .btn-primary:visited,
  .btn-primary:disabled {
-  background-color: #00988E !important;
-  border-color: #00988E !important;
+  background-color: #2889a6 !important;
+  border-color: #2889a6 !important;
+  opacity: 100%;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 
 }
 .btn-primary:hover,
 .btn-primary:focus {
-  background-color: #00988E !important;
-  border-color: #00988E !important;
-  box-shadow: 0px 0px 2px 2px #00b2a6 !important;
+  background-color: #2889a6 !important;
+  border-color: #2889a6 !important;
+  box-shadow: none !important;
+  opacity: 80%;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 }
 
 .btn-secondary,
@@ -56,17 +69,23 @@ body {
  .btn-secondary:visited,
  .btn-secondary:disabled,
  .btn-secondary:active:focus {
-  background-color: #adadad !important;
-  border-color: #adadad !important;
-  color: #3a3a3a !important;
+  background-color: #87be3d !important;
+  border-color: #87be3d !important;
+  opacity: 100%;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 
 }
 .btn-secondary:hover,
 .btn-secondary:focus {
-  background-color: #adadad !important;
-  border-color: #adadad !important;
-  box-shadow: 0px 0px 2px 2px #3a3a3a !important;
-  color: #3a3a3a !important;;
+  background-color: #87be3d !important;
+  border-color: #87be3d !important;
+  box-shadow: none !important;
+  opacity: 80%;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 }
 
 .table-button {
