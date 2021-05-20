@@ -20,33 +20,27 @@ p {
   margin: 0;
 }
 
-.spacer {
-  flex: 1;
+.headerBar {
+  display: block;
+  position: relative;
+  top: 0px;
+  height: auto;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  background-color: #ebede3;
+  color: #404041;
+  border-bottom: solid 3px #adadad;
 }
 
-.toolbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  background-color: #1976d2;
-  color: white;
-  font-weight: 600;
-}
 
-.content {
-  display: flex;
-  margin: 82px auto 32px;
+.container-fluid {
+  margin: 32px auto 32px;
   padding: 0 16px;
   max-width: 960px;
   flex-direction: column;
   align-items: center;
 }
-
-
 
 table {
   width: 100%;
@@ -54,6 +48,17 @@ table {
 
 th.mat-sort-header-sorted {
   color: black;
+}
+.mat-cell {
+  font-size: 12px;
+}
+.mat-column-price {
+  flex: 0 0 60px;
+  width: 60px;
+}
+.mat-column-actions {
+  flex: 0 0 100px;
+  width: 100px;
 }
 
 .mat-row:nth-child(odd){
@@ -67,6 +72,7 @@ th.mat-sort-header-sorted {
 
 
 footer {
+  background-color: #3a3a3a;
   margin-top: 8px;
   display: flex;
   align-items: center;
@@ -76,36 +82,4 @@ footer {
 footer a {
   display: flex;
   align-items: center;
-}
-
-
-
-/* Responsive Styles */
-@media screen and (max-width: 767px) {
-
-  .card-container > *:not(.circle-link) ,
-  .terminal {
-    width: 100%;
-  }
-
-  .card:not(.highlight-card) {
-    height: 16px;
-    margin: 8px 0;
-  }
-
-  .card.highlight-card span {
-    margin-left: 72px;
-  }
-
-  svg#rocket-smoke {
-    right: 120px;
-    transform: rotate(-5deg);
-  }
-}
-
-@media screen and (max-width: 575px) {
-  svg#rocket-smoke {
-    display: none;
-    visibility: hidden;
-  }
 }

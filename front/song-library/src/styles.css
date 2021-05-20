@@ -20,12 +20,59 @@ light grey      #adadad
 font-family "museo-sans", Sans-Serif
 */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: "museo-sans", sans-serif; }
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  font-family: "museo-sans", sans-serif;
+  min-width: fit-content;
+}
+
 .btn {
   margin: 2px;
 }
+.btn-primary,
+ .btn-primary:active,.btn-primary.active,
+ .btn-primary:focus,.btn-primary.focus,
+ .btn-primary:visited,
+ .btn-primary:disabled {
+  background-color: #00988E !important;
+  border-color: #00988E !important;
 
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #00988E !important;
+  border-color: #00988E !important;
+  box-shadow: 0px 0px 2px 2px #00b2a6 !important;
+}
+
+.btn-secondary,
+ .btn-secondary:active,.btn-secondary.active,
+ .btn-secondary:focus,.btn-secondary.focus,
+ .btn-secondary:visited,
+ .btn-secondary:disabled,
+ .btn-secondary:active:focus {
+  background-color: #adadad !important;
+  border-color: #adadad !important;
+  color: #3a3a3a !important;
+
+}
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #adadad !important;
+  border-color: #adadad !important;
+  box-shadow: 0px 0px 2px 2px #3a3a3a !important;
+  color: #3a3a3a !important;;
+}
+
+.table-button {
+  width: 30px;
+  height: 30px;
+}
 
 
 .custom-slider .ngx-slider .ngx-slider-bar {

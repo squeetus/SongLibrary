@@ -17,7 +17,7 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Burlinson Song Library';
+  title = 'Song Library';
 
   // allSongs will keep track of the master list
   public allSongs: Song[] = [];
