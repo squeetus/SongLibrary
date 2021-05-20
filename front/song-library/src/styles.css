@@ -25,3 +25,47 @@ body { margin: 0; font-family: "museo-sans", sans-serif; }
 .btn {
   margin: 2px;
 }
+
+
+
+.custom-slider .ngx-slider .ngx-slider-bar {
+  background: #94C947;
+  height: 2px;
+}
+.custom-slider .ngx-slider .ngx-slider-selection {
+  background: #009200;
+}
+
+.custom-slider .ngx-slider .ngx-slider-pointer {
+  width: 8px;
+  height: 16px;
+  bottom: 0;
+  background-color: #006600;
+}
+
+.custom-slider .ngx-slider .ngx-slider-pointer:after {
+  display: none;
+}
+
+.custom-slider .ngx-slider .ngx-slider-bubble {
+  bottom: 14px;
+  font-weight: bold;
+}
+
+.custom-slider .ngx-slider .ngx-slider-limit {
+  font-weight: normal;
+  color: #404041;
+}
+
+.custom-slider .ngx-slider .ngx-slider-tick {
+  width: 2px;
+  height: 10px;
+  margin-left: 4px;
+  border-radius: 0;
+  background: #94C947;
+  top: -1px;
+}
+
+.custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+  background: #009200;
+}

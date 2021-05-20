@@ -46,6 +46,8 @@ p {
   align-items: center;
 }
 
+
+
 table {
   width: 100%;
 }
@@ -61,6 +63,8 @@ th.mat-sort-header-sorted {
 .mat-row:nth-child(even){
     background-color:#ffffff;
 }
+
+
 
 footer {
   margin-top: 8px;

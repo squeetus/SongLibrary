@@ -32,7 +32,7 @@ import { AlertsComponent } from './alerts/alerts.component';
     MatSortModule,
     NgbModule,
     NgxSliderModule,
-    FontAwesomeModule 
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
