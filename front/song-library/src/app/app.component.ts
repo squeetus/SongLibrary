@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Song } from './song';
+import { Alert } from './alert';
 import { SongService } from './song.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm }   from '@angular/forms';
@@ -7,6 +8,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Options } from '@angular-slider/ngx-slider';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs/Subject';
+
 
 @Component({
   selector: 'app-root',
@@ -24,12 +27,8 @@ export class AppComponent {
     ceil: this.maxVal
   };
 
-  successMessage = '';
-  successTimeout: any = null;
-  dangerMessage = '';
-  dangerTimeout: any = null;
-  @ViewChild('successAlert', {static: false}) successAlert!: NgbAlert;
-  @ViewChild('dangerAlert', {static: false}) dangerAlert!: NgbAlert;
+  //
+  addAlert: Subject<Alert> = new Subject();
 
   // allSongs will keep track of the master list
   public allSongs: Song[] = [];
@@ -74,9 +73,10 @@ export class AppComponent {
         },
         (err: HttpErrorResponse) => {
           console.warn(err.message);
-          this.dangerMessage = err.message;
-          clearTimeout(this.dangerTimeout);
-          this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
+          this.addAlert.next({
+            type: 'danger',
+            message: err.message,
+          });
         }
       );
   }
@@ -86,16 +86,18 @@ export class AppComponent {
     this.songService.addSong(song).subscribe(
       res => {
         console.log(res);
-        this.successMessage = res.message;
-        clearTimeout(this.successTimeout);
-        this.successTimeout = setTimeout(() => this.successAlert.close(), 5000);
+        this.addAlert.next({
+          type: 'success',
+          message: res.message,
+        });
         this.getSongs();
       },
       (err: HttpErrorResponse) => {
         console.warn(err.message);
-        this.dangerMessage = err.message;
-        clearTimeout(this.dangerTimeout);
-        this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
+        this.addAlert.next({
+          type: 'danger',
+          message: err.message,
+        });
       }
     );
   }
@@ -106,16 +108,18 @@ export class AppComponent {
     this.songService.updateSong(song).subscribe(
       res => {
         console.log(res);
-        this.successMessage = res.message;
-        clearTimeout(this.successTimeout);
-        this.successTimeout = setTimeout(() => this.successAlert.close(), 5000);
+        this.addAlert.next({
+          type: 'success',
+          message: res.message,
+        });
         this.getSongs();
       },
       (err: HttpErrorResponse) => {
         console.warn(err.message);
-        this.dangerMessage = err.message;
-        clearTimeout(this.dangerTimeout);
-        this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
+        this.addAlert.next({
+          type: 'danger',
+          message: err.message,
+        });
       }
     );
   }
@@ -125,16 +129,18 @@ export class AppComponent {
     this.songService.deleteSong(id).subscribe(
       res => {
         console.log(res);
-        this.successMessage = res.message;
-        clearTimeout(this.successTimeout);
-        this.successTimeout = setTimeout(() => this.successAlert.close(), 5000);
+        this.addAlert.next({
+          type: 'success',
+          message: res.message,
+        });
         this.getSongs();
       },
       (err: HttpErrorResponse) => {
         console.warn(err.message);
-        this.dangerMessage = err.message;
-        clearTimeout(this.dangerTimeout);
-        this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
+        this.addAlert.next({
+          type: 'danger',
+          message: err.message,
+        });
       }
     );
   }
@@ -143,16 +149,18 @@ export class AppComponent {
   public saveList(): void {
     this.songService.saveList(JSON.stringify(this.filteredSongs)).subscribe(
       (res) => {
+        this.addAlert.next({
+          type: 'success',
+          message: res.message,
+        });
         console.log(res)
-        this.successMessage = res.message;
-        clearTimeout(this.successTimeout);
-        this.successTimeout = setTimeout(() => this.successAlert.close(), 5000);
       },
       (err: HttpErrorResponse) => {
         console.warn(err.error);
-        this.dangerMessage = err.error;
-        clearTimeout(this.dangerTimeout);
-        this.dangerTimeout = setTimeout(() => this.dangerAlert.close(), 5000);
+        this.addAlert.next({
+          type: 'danger',
+          message: err.error,
+        });
       }
     );
   }
@@ -180,4 +188,5 @@ export class AppComponent {
         }
     };
   }
+
 }

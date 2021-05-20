@@ -4,12 +4,9 @@
 
   <hr/>
 
-  <ngb-alert #successAlert *ngIf="successMessage" type="success" (closed)="successMessage = ''">{{ successMessage }}
-  </ngb-alert>
-  <ngb-alert #dangerAlert *ngIf="dangerMessage" type="danger" (closed)="dangerMessage = ''">{{ dangerMessage }}
-  </ngb-alert>
-
   <div class="row">
+      <app-alerts [newAlert]="addAlert"></app-alerts>
+
       <div class="col col-lg-6 col-md-6 col-sm-6 justify-content-center align-self-center text-center">
         <p>Filter by release date</p>
         <ngx-slider [(value)]="minVal" [(highValue)]="maxVal" [options]="sliderOptions" (userChangeEnd)="filter()" (valueChange)="doFilter()" (highValueChange)="doFilter()"></ngx-slider>

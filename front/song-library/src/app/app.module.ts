@@ -13,13 +13,15 @@ import { UpdateModalComponent } from './song-modal/update-modal.component';
 import { AddModalComponent } from './song-modal/add-modal.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AlertsComponent } from './alerts/alerts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeleteModalComponent,
     UpdateModalComponent,
-    AddModalComponent
+    AddModalComponent,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,
