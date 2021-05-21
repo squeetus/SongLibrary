@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Song } from './song';
-import { Alert } from './alert';
+import { Alert } from './alerts/alert';
 import { SongService } from './song.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm }   from '@angular/forms';
