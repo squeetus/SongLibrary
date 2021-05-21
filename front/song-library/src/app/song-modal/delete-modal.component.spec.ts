@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SongModalComponent } from './song-modal.component';
+import { DeleteModalComponent } from './delete-modal.component';
 
-describe('SongModalComponent', () => {
-  let component: SongModalComponent;
-  let fixture: ComponentFixture<SongModalComponent>;
+describe('DeleteModalComponent', () => {
+  let component: DeleteModalComponent;
+  let fixture: ComponentFixture<DeleteModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SongModalComponent ]
+      declarations: [ DeleteModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SongModalComponent);
+    fixture = TestBed.createComponent(DeleteModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
