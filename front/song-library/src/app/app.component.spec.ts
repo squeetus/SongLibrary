@@ -7,6 +7,8 @@ import { Observable, of } from 'rxjs';
 import { SongService } from './song.service';
 import { By } from "@angular/platform-browser";
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { Options } from '@angular-slider/ngx-slider';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -18,7 +20,8 @@ describe('AppComponent', () => {
       ],
       imports: [
         HttpClientModule,
-        MatTableModule
+        MatTableModule,
+        NgxSliderModule
       ],
       providers: [
         {provide: SongService, useClass: SongServiceStub}
@@ -65,6 +68,19 @@ describe('AppComponent', () => {
     expect(fixture.componentInstance.saveList).toHaveBeenCalled();
   }));
 
+  it('should create a custom ngx-slider', () => {
+    expect(fixture.nativeElement.querySelector('.custom-slider')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.ngx-slider')).toBeTruthy();
+  });
+
+  it('should initialize the ngx-slider with useful values', () => {
+    const component = fixture.componentInstance;
+    expect(component.minVal).toEqual(2016);
+    expect(component.maxVal).toEqual(2021);
+    expect(component.sliderOptions.showTicks).toBeTruthy();
+    expect(component.sliderOptions.disabled).toBeFalse();
+  });
+
   it('should create a mat-table', () => {
     const compiled = fixture.nativeElement;
     const tableElement = compiled.querySelector('.container-fluid table');
@@ -101,21 +117,21 @@ class SongServiceStub {
         id: 2,
         title: "Song Title",
         artist: "An Artist",
-        release_date: "01-01-2019",
+        release_date: "2019-01-01",
         price: 14.99
     },
     {
         id: 4,
         title: "Another Song",
         artist: "Another Artist",
-        release_date: "12-31-2016",
+        release_date: "2016-12-31",
         price: 27.99
     },
     {
         id: 5,
         title: "A Third Song",
         artist: "Artist #3",
-        release_date: "07-04-2021",
+        release_date: "2021-04-07",
         price: 17.76
     }]);
   }

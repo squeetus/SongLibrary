@@ -28,7 +28,16 @@ describe('AlertsComponent', () => {
     expect(fixture.nativeElement.querySelector('.alert-messages')).toBeTruthy();
   });
 
-  it('should receive new data from newAlert and delete it again after 3.5 seconds', () => {
+  it('should receive new data from newAlert', () => {
+    expect(component.alerts.length).toBe(0);
+    component.newAlert.next({
+      type: 'success',
+      message: 'an alert message',
+    });
+    expect(component.alerts.length).toBe(1);
+  });
+
+  it('should delete alerts after 3.5 seconds', () => {
     expect(component.alerts.length).toBe(0);
     component.newAlert.next({
       type: 'success',
@@ -38,6 +47,5 @@ describe('AlertsComponent', () => {
     setTimeout(() => {
       expect(component.alerts.length).toBe(0);
     }, 3500);
-
   });
 });
