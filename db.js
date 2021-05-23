@@ -27,7 +27,6 @@ if(process.env.CLEARDB_DATABASE_URL) {
       price decimal(9,2) NOT NULL
     );
     `
-mysql://ba46bbadadd776:452b27d1@us-cdbr-east-03.cleardb.com/heroku_10d242b278d75f1?reconnect=true
   // local
   } else {
     connection = mysql.createConnection({
