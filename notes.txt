@@ -1,8 +1,0 @@
-specifying a subdirectory as the root for github pages:
-git subtree push --prefix front/song-library/dist/song-library origin gh-pages
-
-if index.html is not automatically found by the production distribution:
-go in to index.html and manually change doctype to DOCTYPE
-
-ideas for concatenating the generated scripts into one:
-https://stackoverflow.com/questions/42933220/how-to-get-one-file-as-output-of-angular-cli
