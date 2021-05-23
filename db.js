@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-let pool;
+const pool;
 let connection;
 
 // command to create the song database and song table schema once
@@ -67,6 +67,9 @@ if(process.env.CLEARDB_DATABASE_URL) {
     });
 
     pool = mysql.createPool(params);
+    pool.on('error', (err) => {
+      console.log('pool error:', err);
+    }
 }
 
 /*
