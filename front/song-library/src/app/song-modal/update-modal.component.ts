@@ -1,4 +1,4 @@
-import { Input, Output, EventEmitter, Component } from '@angular/core';
+import { Input, Output, EventEmitter, Component, TemplateRef, ViewChild } from '@angular/core';
 import { Song } from '../song';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -11,8 +11,12 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 })
 export class UpdateModalComponent {
   public songForm: FormGroup;
+
+  closeResult?: string;
+
   @Input() song!: Song;
   @Output() updateSong = new EventEmitter<Song>();
+  @ViewChild('editModal') updateModal!: TemplateRef<any>;
 
   faEdit = faEdit;
 
@@ -40,7 +44,7 @@ export class UpdateModalComponent {
 
     // open the modal and handle the result
     this.modalService.open(editModal).result.then((result) => {
-      console.log(this.songForm);
+      this.closeResult = result;
 
       // make sure the Song form is valid
       if(this.songForm.valid) {
@@ -49,6 +53,7 @@ export class UpdateModalComponent {
       }
     }, (reason) => {
       // edit modal dismissed
+      this.closeResult = reason;
     });
   }
 }

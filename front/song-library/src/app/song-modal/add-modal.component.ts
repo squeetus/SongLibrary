@@ -1,4 +1,4 @@
-import { Input, Output, EventEmitter, Component } from '@angular/core';
+import { Input, Output, EventEmitter, Component, TemplateRef, ViewChild } from '@angular/core';
 import { Song } from '../song';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -10,8 +10,12 @@ import { CustomValidators } from './custom-validators';
 })
 export class AddModalComponent {
   public songForm: FormGroup;
+
+  closeResult?: string;
+
   @Input() song!: Song;
   @Output() addSong = new EventEmitter<Song>();
+  @ViewChild('addModal') addModal!: TemplateRef<any>;
 
   // set the structure and validators for the song form
   constructor(private modalService: NgbModal, public fb: FormBuilder) {
@@ -34,7 +38,7 @@ export class AddModalComponent {
 
     // open the modal and handle the result
     this.modalService.open(addModal).result.then((result) => {
-      console.log(this.songForm);
+      this.closeResult = result;
 
       // make sure the Song form is valid
       if(this.songForm.valid) {
@@ -43,6 +47,7 @@ export class AddModalComponent {
       }
     }, (reason) => {
       // edit modal dismissed
+      this.closeResult = reason;
     });
   }
 }
