@@ -70,6 +70,9 @@ if(process.env.CLEARDB_DATABASE_URL) {
     pool.on('error', (err) => {
       console.log('pool error:', err);
     });
+    connection.on('error', (err) => {
+      console.log('connection error:', err);
+    });
 }
 
 /*
@@ -79,6 +82,7 @@ if(process.env.CLEARDB_DATABASE_URL) {
 exports.getAllSongs = (cb) => {
   pool.getConnection(function(error, connection) {
     connection.query("SELECT * FROM song", (err, result) => cb(err, result));
+    console.log('releasing connection now');
     connection.release();
     if (error) throw error;
   });
