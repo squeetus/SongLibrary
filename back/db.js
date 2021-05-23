@@ -39,7 +39,6 @@ let params = {
 // prod
 if(process.env.CLEARDB_DATABASE_URL) {
   params.database = process.env.CLEARDB_DB;
-  pool = mysql.createPool(params);
 
   // local
 } else {
@@ -48,13 +47,11 @@ if(process.env.CLEARDB_DATABASE_URL) {
     console.log('database created');
   });
   params.database = 'burlinson_song_library';
-
-  pool = mysql.createPool(params);
 }
 
   /*
     Connect to the database described in the params
-    Run commands to drop/create the database and song table and seed song data
+    Run commands to drop/create the song table and seed song data
   */
   exports.connect = () => {
     connection = mysql.createConnection(params);
@@ -68,6 +65,8 @@ if(process.env.CLEARDB_DATABASE_URL) {
       if(err) throw('unable to execute query: ' + err.stack);
       console.log('songs seeded');
     });
+
+    pool = mysql.createPool(params);
 }
 
 /*
