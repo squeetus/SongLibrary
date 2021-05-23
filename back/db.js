@@ -74,7 +74,11 @@ if(process.env.CLEARDB_DATABASE_URL) {
   pass the resultant array and any errors to the callback function
 */
 exports.getAllSongs = (cb) => {
-  pool.query("SELECT * FROM song", (err, result) => cb(err, result));
+  pool.getConnection(function(error, connection) {
+    connection.query("SELECT * FROM song", (err, result) => cb(err, result));
+    connection.release();
+    if (error) throw error;
+  });
 }
 
 /*
@@ -82,11 +86,15 @@ exports.getAllSongs = (cb) => {
   pass the result and any errors to the callback function
 */
 exports.addSong = (song, cb) => {
-  pool.execute(
-    "INSERT INTO song (title, artist, release_date, price) VALUES (?, ?, ?, ?)",
-    [song.title, song.artist, new Date(song.release_date), song.price],
-    (err, result) => cb(err, result)
-  );
+  pool.getConnection(function(error, connection) {
+    connection.execute(
+      "INSERT INTO song (title, artist, release_date, price) VALUES (?, ?, ?, ?)",
+      [song.title, song.artist, new Date(song.release_date), song.price],
+      (err, result) => cb(err, result)
+    );
+    connection.release();
+    if (error) throw error;
+  });
 }
 
 /*
@@ -94,11 +102,15 @@ exports.addSong = (song, cb) => {
   pass the result and any errors to the callback function
 */
 exports.updateSong = (song, cb) => {
-  pool.execute(
-    "UPDATE song SET title=?, artist=?, release_date=?, price=? WHERE id=?",
-    [song.title, song.artist, new Date(song.release_date), song.price, song.id],
-    (err, result) => cb(err, result)
-  );
+  pool.getConnection(function(error, connection) {
+    connection.execute(
+      "UPDATE song SET title=?, artist=?, release_date=?, price=? WHERE id=?",
+      [song.title, song.artist, new Date(song.release_date), song.price, song.id],
+      (err, result) => cb(err, result)
+    );
+    connection.release();
+    if (error) throw error;
+  });
 }
 
 /*
@@ -106,9 +118,13 @@ exports.updateSong = (song, cb) => {
   pass the result and any errors to the callback function
 */
 exports.deleteSong = (id, cb) => {
-  pool.execute(
-    "DELETE from song WHERE id=?",
-    [id],
-    (err, result) => cb(err, result)
-  );
+  pool.getConnection(function(error, connection) {
+    connection.execute(
+      "DELETE from song WHERE id=?",
+      [id],
+      (err, result) => cb(err, result)
+    );
+    connection.release();
+    if (error) throw error;
+  });
 }
