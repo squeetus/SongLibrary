@@ -69,7 +69,7 @@ if(process.env.CLEARDB_DATABASE_URL) {
     pool = mysql.createPool(params);
     pool.on('error', (err) => {
       console.log('pool error:', err);
-    }
+    });
 }
 
 /*
