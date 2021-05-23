@@ -2,9 +2,9 @@ const mysql = require('mysql2');
 
 // Create a MySQL connection with hard-coded credentials for local testing
 const connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : process.env.CLEARDB_DATABASE_URL || 'localhost',
   user     : 'songlibrarytest',
-  password : 'test',
+  password : 'testtest',
   multipleStatements: true,
   dateStrings: true,
   timezone: '+00:00'
