@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-const pool;
+let pool;
 let connection;
 
 // command to create the song database and song table schema once
