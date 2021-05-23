@@ -18,7 +18,7 @@ if(process.env.CLEARDB_DATABASE_URL) {
 
   // command to create the song database and song table schema once
   createCommand = `
-    DROP TABLE song;
+    DROP TABLE IF EXISTS song;
     CREATE TABLE song (
       id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
       title varchar(100) NOT NULL,
