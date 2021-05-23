@@ -7,10 +7,10 @@ let seedCommand;
 // prod
 if(process.env.CLEARDB_DATABASE_URL) {
   connection = mysql.createConnection({
-    host     : process.env.CLEARDB_DATABASE_URL,
-    user     : 'songlibrarytest',
-    password : 'testtest',
-    database : 'heroku_10d242b278d75f1',
+    host     : process.env.CLEARDB_HOST,
+    user     : process.env.CLEARDB_USER,
+    password : process.env.CLEARDB_PASS,
+    database : process.env.CLEARDB_DB,
     multipleStatements: true,
     dateStrings: true,
     timezone: '+00:00'
@@ -27,7 +27,7 @@ if(process.env.CLEARDB_DATABASE_URL) {
       price decimal(9,2) NOT NULL
     );
     `
-
+mysql://ba46bbadadd776:452b27d1@us-cdbr-east-03.cleardb.com/heroku_10d242b278d75f1?reconnect=true
   // local
   } else {
     connection = mysql.createConnection({
