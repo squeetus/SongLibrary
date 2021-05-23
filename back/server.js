@@ -25,6 +25,7 @@ app.get('/getAllSongs', (req, res) => {
       console.log(err);
       res.status(500).send(err);
     } else {
+      console.log('sending song JSON now');
       res.json(songs);
     }
   });
