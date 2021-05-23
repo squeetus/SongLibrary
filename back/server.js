@@ -4,7 +4,7 @@ const cors = require('cors');
 const db = require('./db');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // instruct the database to connect, create, and seed
 db.connect();
