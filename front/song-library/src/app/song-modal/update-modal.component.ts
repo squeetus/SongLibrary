@@ -24,8 +24,8 @@ export class UpdateModalComponent {
   constructor(private modalService: NgbModal, public fb: FormBuilder) {
     this.songForm = this.fb.group({
       id: '',
-      title: ['', Validators.required],
-      artist: ['', Validators.required],
+      title: ['', [Validators.required, Validators.maxLength(100)]],
+      artist: ['', [Validators.required, Validators.maxLength(100)]],
       release_date: ['', [Validators.required, CustomValidators.songDate]],
       price: ['', [Validators.required, Validators.min(0), Validators.max(1000000)]]
     });

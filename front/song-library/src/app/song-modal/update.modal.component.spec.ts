@@ -160,6 +160,32 @@ describe('UpdateModalComponent', () => {
     expect(submit.disabled).toBeTruthy();
   }));
 
+  it('should generate errors when artist is too long', fakeAsync(() => {
+    component.open(component.updateModal);
+    tick(10);
+    fixture.detectChanges();
+    let artist = '';
+    for(let i = 0; i < 101; i++) artist+='a';
+    component.songForm.patchValue({artist: artist});
+    let submit = document.body.querySelector('.modal-dialog .modal-footer .btn-primary') as HTMLButtonElement;
+    tick(10);
+    fixture.detectChanges();
+    expect(submit.disabled).toBeTruthy();
+  }));
+
+  it('should generate errors when title is too long', fakeAsync(() => {
+    component.open(component.updateModal);
+    tick(10);
+    fixture.detectChanges();
+    let title = '';
+    for(let i = 0; i < 101; i++) title += 'b';
+    component.songForm.patchValue({title: title});
+    let submit = document.body.querySelector('.modal-dialog .modal-footer .btn-primary') as HTMLButtonElement;
+    tick(10);
+    fixture.detectChanges();
+    expect(submit.disabled).toBeTruthy();
+  }));
+
   it('should enable submit with valid artist input', fakeAsync(() => {
     component.open(component.updateModal);
     tick(10);
