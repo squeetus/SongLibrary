@@ -124,3 +124,33 @@ You can also set up the project to run on your local machine using the following
 
 	Finally, you can push the built front app to the gh-pages branch on github
 	> git subtree push --prefix front/song-library/dist/song-library origin gh-pages
+
+
+# Discussion
+
+### Technologies
+
+I chose to implement a server side component using Node, Express, and MySQL because I am comfortable enough with those technologies to quickly get a bare-bones API running, and I am familiar enough with the hosting process on Heroku to facilitate local and live versions of the back-end system. I wanted to be able to configure and adjust the API throughout the front-end development process as needs and issues arose and as the application evolved.
+
+I chose Angular for the front-end application because it is a very robust framework and I wanted to continue climbing its learning curve. There were multiple features I wanted to either learn or learn to integrate with other concepts, so it offered a good balance of comfort and novelty. In particular, I wanted to use reactive forms, an angular materials table, and the ngx-slider module as the primary components of the Song Library. There are parts of the application that could be abstracted further, but I generally tried to follow standard practices for angular applications involving services, subcomponents, etc.
+
+### UI and UX
+
+For the primary Song content in the application, the angular-mat table provided an excellent point of entry for much of the desired functionality. The Angular Materials components do a good job of integrating accessibility constructs, and the table is easily extended to facilitate sorting by columns.
+
+I chose to use modals to display form content for adding, deleting, and editing the song data. Since the primary focus of the application is the display of all Songs and the number of Songs and attributes is relatively small, I felt modals would support the flow of interaction well without inhibiting a user's context. For deletion, users are prompted whether they are certain, and can easily acknowledge or dismiss the modal. For editing, the song form is populated with the chosen song's data. For adding, a fresh form is presented. If the user directly cancels the modal any entered values are erased, but if they dismiss the modal by clicking outside then the form content is preserved. Form data can only be submitted when the reactive form is valid.
+
+For Validation, I ensure the Song attributes are of the correct type. I also imposed some relatively arbitrary restrictions on the attributes:
+	- title and artist cannot be longer than 100 characters. Brevity is the soul of wit.
+	- release date must be a valid year in Common Era, but cannot be further in the future than the year 9999. If a compelling argument could be made for supporting songs from BCE or beyond several thousand years in the future I might consider modifying this restriction.
+	- price must be a non-negative number less than or equal to $1,000,000. Negative prices would adversely affect the Song Library's bank account, and prices above one million dollars are unacceptable.
+
+For filtering I chose to use a slider due to that interaction modality's simplicity. As either end of the slider is adjusted, the table reacts dynamically to display only songs with release dates within the given boundaries. I throttle the firing of that event so that it updates quickly enough but does not fire excessively. The bounds of the filter do change dynamically when songs are added to or removed from the collection. The Save List button only saves the set of currently filtered songs, and does not allow the saving of empty lists.
+
+I imported some angular bootstrap modules to give helpful alerts on success or error of various user interactions. Console logging is fine, but it is also helpful to display success, warning, or danger alerts in familiar colors so users are given direct feedback on the operations they perform. I chose to stack the alerts, so if you are quick enough to generate several they will start filling your screen, but I also set them to disappear after a few seconds since the messages are fairly brief. This approach probably does not scale well in contexts where users are performing many operations in sequence, but is ok for a simple application.
+
+For the color scheme, fonts, and button styles, I copied color codes directly from the PERA website. PERA capitalizes text on buttons and balances white and grey with several shades of green, so I tried to reflect those features despite the relative simplicity of the Song Library app. I used the lightest green color on every other row in the table so attention is easily drawn to individual songs. PERA primary buttons are a slightly different shade of blue than the default bootstrap blue, and button hovering reduces opacity rather than adding shadows, so I overrode those styles in the root css file of the angular app.
+
+### Testing
+
+I tried to generate a reasonable number of tests to ensure the components and overall application work as expected. They do not cover every possible interaction or case by any means, but they give confidence that the app is being generated, the table, buttons, and slider are being added to the page properly, data is displayed as expected, the user interactions call the right methods, the app interfaces with the local database, and so forth.
