@@ -106,8 +106,8 @@ body {
 
 .custom-slider .ngx-slider .ngx-slider-pointer {
   width: 8px;
-  height: 16px;
-  bottom: 0;
+  height: 20px;
+  top: -10px;
   background-color: #006600;
 }
 
