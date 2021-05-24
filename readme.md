@@ -141,6 +141,7 @@ For the primary Song content in the application, the angular-mat table provided 
 I chose to use modals to display form content for adding, deleting, and editing the song data. Since the primary focus of the application is the display of all Songs and the number of Songs and attributes is relatively small, I felt modals would support the flow of interaction well without inhibiting a user's context. For deletion, users are prompted whether they are certain, and can easily acknowledge or dismiss the modal. For editing, the song form is populated with the chosen song's data. For adding, a fresh form is presented. If the user directly cancels the modal any entered values are erased, but if they dismiss the modal by clicking outside then the form content is preserved. Form data can only be submitted when the reactive form is valid.
 
 For Validation, I ensure the Song attributes are of the correct type. I also imposed some relatively arbitrary restrictions on the attributes:
+
 	- title and artist cannot be longer than 100 characters. Brevity is the soul of wit.
 	- release date must be a valid year in Common Era, but cannot be further in the future than the year 9999. If a compelling argument could be made for supporting songs from BCE or beyond several thousand years in the future I might consider modifying this restriction.
 	- price must be a non-negative number less than or equal to $1,000,000. Negative prices would adversely affect the Song Library's bank account, and prices above one million dollars are unacceptable.
