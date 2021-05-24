@@ -144,15 +144,15 @@ For Validation, I ensure the Song attributes are of the correct type. I also imp
 
 	- title and artist cannot be longer than 100 characters.
 
-	Brevity is the soul of wit.
+		- Brevity is the soul of wit.
 
 	- release date must be a valid year in Common Era, but cannot be further in the future than the year 9999.
 
-	If a compelling argument could be made for supporting songs from BCE or beyond several thousand years in the future I might consider modifying this restriction.
+		- If a compelling argument could be made for supporting songs from BCE or beyond several thousand years in the future I might consider modifying this restriction.
 
 	- price must be a non-negative number less than or equal to $1,000,000.
 
-	Negative prices would adversely affect the Song Library's bank account, and prices above one million dollars are unacceptable.
+		- Negative prices would adversely affect the Song Library's bank account, and prices above one million dollars are unacceptable.
 
 For filtering I chose to use a slider due to that interaction modality's simplicity. As either end of the slider is adjusted, the table reacts dynamically to display only songs with release dates within the given boundaries. I throttle the firing of that event so that it updates quickly enough but does not fire excessively. The bounds of the filter do change dynamically when songs are added to or removed from the collection. The Save List button only saves the set of currently filtered songs, and does not allow the saving of empty lists.
 
