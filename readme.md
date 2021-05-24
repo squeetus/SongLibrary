@@ -128,6 +128,10 @@ You can also set up the project to run on your local machine using the following
 
 # Discussion
 
+### Songs
+
+Music is a universal cultural phenomenon and yet a profoundly subjective taste. I've seeded the database with five songs from albums I have enjoyed recently and which have encouraged me in the process of implementing this application. The encoded prices reflect an entirely abstract measure of my appreciation for them, but the title, artist, and release date are as accurate as possible. 
+
 ### Technologies
 
 I chose to implement a server side component using Node, Express, and MySQL because I am comfortable enough with those technologies to quickly get a bare-bones API running, and I am familiar enough with the hosting process on Heroku to facilitate local and live versions of the back-end system. I wanted to be able to configure and adjust the API throughout the front-end development process as needs and issues arose and as the application evolved.
