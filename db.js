@@ -19,11 +19,11 @@ let createCommand = `
 let seedCommand = `
   INSERT INTO song (title, artist, release_date, price)
   VALUES
-    ('Song1', 'Artist1', Date("2021-05-04"), 12.99),
-    ('Song2', 'Artist2', Date("2021-04-03"), 35.00),
-    ('Song3', 'Artist3', Date("2021-02-01"), 2.45),
-    ('Song4', 'Artist4', Date("2020-12-11"), 108.88),
-    ('Song5', 'Artist5', Date("2020-10-09"), 15.01)
+    ('The Warp Riders', 'The Sword', Date("2010-08-19"), 120.00),
+    ('Made Possible', 'The Bad Plus', Date("2012-09-25"), 60.00),
+    ('Where Owls Know My Name', 'Rivers of Nihil', Date("2018-03-16"), 125.01),
+    ('Donut Man', 'Darryl Reeves', Date("2013-01-01"), 50.75),
+    ('The Weaver System', 'IOTUNN', Date("2021-02-26"), 110.99)
   ;
   `
 
