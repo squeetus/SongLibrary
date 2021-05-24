@@ -28,6 +28,11 @@ export class AddModalComponent {
     });
   }
 
+  // reset the reactive form
+  resetForm(): void {
+    this.songForm.reset();
+  }
+
   // expose controls for reactive validation
   get songFormControl() {
     return this.songForm.controls;
@@ -44,10 +49,17 @@ export class AddModalComponent {
       if(this.songForm.valid) {
         // pass the song values to the parent module to add
         this.addSong.emit(this.songForm.value);
+
+        // reset the form for the next add action
+        this.resetForm();
       }
     }, (reason) => {
       // edit modal dismissed
       this.closeResult = reason;
+
+      // reset the form if cancel button pressed
+      if(reason == 'No add')
+        this.songForm.reset();
     });
   }
 }

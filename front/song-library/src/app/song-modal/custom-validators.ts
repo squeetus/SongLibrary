@@ -6,6 +6,8 @@ export class CustomValidators {
   static songDate(control: FormControl): ValidationErrors | null {
     let DatePattern = /^\d{4}[./-]\d{2}[./-]\d{2}$/g;
 
+    if(!control || control.value === null) return null;
+
     if (!control.value.match(DatePattern)) {
      return { "invalidDate": true };
     }
